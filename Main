@@ -1,0 +1,1522 @@
+#Mohammed Zayed
+#November 1, 2021
+#This is a fun platformer/obstacle course based off the large collection of some Scratch classics and Geometry Dash. It has 7 levels and amazing code
+
+
+#Title Screen Stuff
+
+TitleScreenPlayer = Group(
+        Rect(120,120,160,160, fill = gradient("firebrick", "maroon", start = "left"), rotateAngle = 60)
+    )
+
+TitleScreenPlayer.centerY = 150
+TitleScreenPlayer.centerX = 110
+TitleScreenPlayerEyes = Circle(TitleScreenPlayer.centerX, TitleScreenPlayer.centerY, 50, fill = "white")
+TitleScreenPlayerPupil = Circle(TitleScreenPlayer.centerX + 20, TitleScreenPlayer.centerY - 5, 20)
+
+TitleScreenPlayer.add(TitleScreenPlayerEyes, TitleScreenPlayerPupil)
+
+TitleScreenPlayer.speedY = 0
+TitleScreenPlayer.rotateSpeed = 0
+
+YouWin = Label("YOU WON!", 200, 200, bold = True, size = 50, fill = "white", visible = False)
+
+Title = Label("Ultimate Ultimate Rescue Mission", 200, 30, size = 24, bold = True, fill = "red", border = "black")
+
+SandboxRect = Rect(15, 285, 75, 55, fill = gradient( "firebrick", "maroon", start = "left"))
+SandboxText = Label("SANDBOX",SandboxRect.centerX,SandboxRect.centerY, fill = "white", size = 14, bold = True)
+Sandbox = Group(SandboxRect, SandboxText)
+
+PlayRect = Rect(120,265,160,55, fill = gradient("firebrick", "maroon", start = "left"))
+PlayText = Label("PLAY", PlayRect.centerX, PlayRect.centerY, fill = "white", size = 40, bold = True)
+PlayButton = Group(PlayRect, PlayText)
+
+InstructionsRect = Rect(100, 340, 200, 35, fill = gradient("firebrick", "maroon", start = "left"))
+InstructionsText = Label("INSTRUCTIONS", InstructionsRect.centerX, InstructionsRect.centerY, size = 20, fill = "white", bold = True)
+
+InstructionsButton = Group(InstructionsRect, InstructionsText)
+
+ShoppingBag = Rect(310, 285, 75, 55, fill = gradient("firebrick", "maroon", start = "left"))
+ShoppingBagText = Label("SHOP", ShoppingBag.centerX, ShoppingBag.centerY, size = 25, bold = True, fill = "white")
+Shop = Group(ShoppingBag, ShoppingBagText)
+
+print(ShoppingBag.centerX)
+
+
+
+
+
+#DEATH PAGE STUFF
+YouLosePlayerBody = Rect(200,200,80,80, fill = "firebrick")
+
+YouLosePlayerBody.centerX = 200
+YouLosePlayerBody.centerY = 200
+YouLosePlayerBodyEye = Circle(YouLosePlayerBody.centerX, YouLosePlayerBody.centerY, 30, fill = "white")
+YouLosePlayerBodyYeet = Oval(200, 230, 75, 20, fill = "firebrick")
+YouLosePlayerBodyYeetAlso = Oval(200, 170, 75, 20, fill = "firebrick")
+
+YouLosePlayerBodyPupil = Circle(YouLosePlayerBody.centerX, YouLosePlayerBody.centerY, 15)
+
+YouLoseSpeechBubble = Oval(300, 80, 150, 100, fill = "white")
+YouLoseSpeechBubbleLine = Line(333, 116, 259, 179, fill = "white", lineWidth = 5)
+RandomEnding = randrange(1,3)
+if RandomEnding == 1:
+    RandomEnding = "You Lose!"
+elif RandomEnding == 2:
+    RandomEnding = "Haha you suck"
+elif RandomEnding == 3:
+    RandomEnding = "haha"
+YouLoseSpeechBubbleText = Label(RandomEnding, YouLoseSpeechBubble.centerX, YouLoseSpeechBubble.centerY, size = 17, bold = True)
+
+YouLosePlayer = Group(YouLosePlayerBody,YouLosePlayerBodyEye, YouLosePlayerBodyYeet,YouLosePlayerBodyYeetAlso,YouLosePlayerBodyPupil,YouLoseSpeechBubble,YouLoseSpeechBubbleLine,YouLoseSpeechBubbleText, visible = False)
+
+ReturnButtonRect = Rect(200, 200, 200, 50, fill = gradient("firebrick", "maroon", start = "left"))
+
+ReturnButtonRect.centerX = 200
+ReturnButtonRect.centerY = 320
+
+ReturnButtonText  = Label("RETURN",ReturnButtonRect.centerX,ReturnButtonRect.centerY, size = 30, fill = "white", bold = True)
+
+ReturnButton = Group(ReturnButtonRect, ReturnButtonText, visible = False)
+
+
+
+#Shop Stuff
+PurchaseCharacter1Bought = Label(1, 200, 200, size = 1, opacity = 0, visible = False)
+PurchaseCharacter2Bought = Label(1, 200, 200, size = 1, opacity = 0, visible = False)
+PurchaseCharacter3Bought = Label(1, 200, 200, size = 1, opacity = 0, visible = False)
+PurchaseCharacter4Bought = Label(1, 200, 200, size = 1, opacity = 0, visible = False)
+PurchaseCharacter5Bought = Label(1, 200, 200, size = 1, opacity = 0, visible = False)
+PurchaseCharacter6Bought = Label(1, 200, 200, size = 1, opacity = 0, visible = False)
+PurchaseCharacter7Bought = Label(1, 200, 200, size = 1, opacity = 0, visible = False)
+PurchaseCharacter8Bought = Label(1, 200, 200, size = 1, opacity = 0, visible = False)
+
+
+CoinsTextShop = Label("COINS:",40, 75, fill = "white", bold = True, size = 20, visible = False)
+
+SelectedCharacterRect = Rect(120, 80, 60, 60, fill = "dimgray", opacity = 50)
+
+ShopText = Group(
+    Label("CHARACTER SHOP (:", 205, 35, fill = "dimgray", size = 30, bold = True, italic = True),
+    Label("CHARACTER SHOP (:", 200, 30, fill = "white", size = 30, bold = True, italic = True, border = "red")
+    )
+ShopText.visible = False
+
+
+#Charcter Shop Stuff
+DefaultCharacterBody = Rect(40, 280, 40, 40, fill = gradient("firebrick", "maroon", start = "left"))
+DefaultCharacterPurchase = Group(
+    DefaultCharacterBody,
+    Circle(DefaultCharacterBody.centerX, DefaultCharacterBody.centerY, 15, fill = "white"),
+    Circle(DefaultCharacterBody.centerX, DefaultCharacterBody.centerY, 7)
+    )
+DefaultCharacterPurchase.centerX = 200
+DefaultCharacterPurchase.centerY = 85
+DefaultCharacterPurchase.visible = False
+
+SelectedCharacterRect.centerX = DefaultCharacterPurchase.centerX
+SelectedCharacterRect.centerY = DefaultCharacterPurchase.centerY
+
+
+
+Body= Rect(40, 280, 40, 40, fill= gradient("firebrick", "maroon", start = "left"))
+InsideTriangle = Polygon(40, 320, 60, 280, 80, 320, fill='white')
+InsideCircle = Circle(60, 300, 8, fill='black')
+PurchaseCharacter1 = Group(Body, InsideTriangle, InsideCircle, Label("25 Coins", 60, Body.centerY + 30, size = 15, fill = "white", bold = True))
+PurchaseCharacter1.centerY = 160
+PurchaseCharacter1.centerX = 50
+PurchaseCharacter1.visible = False
+
+PurchaseCharacter2Body = Rect(80, 80, 40, 40, fill = rgb(204, 27, 35))
+LeftEye1 = Polygon(97, 95, 87, 85, 84, 101, 89, 110, 99, 105, 97, 95)
+RightEye1 = Polygon(101, 105, 103, 95, 113, 85, 116, 101, 111, 110, 101, 105)
+LeftEye2 = Polygon(87, 96, 96, 100, 90, 102, 87, 96, fill = "white")
+RightEye2 = Polygon(104, 100, 113, 96, 110, 102, 104, 100, fill = "white")
+PurchaseCharacter2 = Group(PurchaseCharacter2Body, LeftEye1, RightEye1, LeftEye2, RightEye2, Label("25 Coins", PurchaseCharacter2Body.centerX, PurchaseCharacter2Body.centerY + 30, fill = "white", size = 15, bold = True))
+PurchaseCharacter2.centerX = 350
+PurchaseCharacter2.centerY = 160
+PurchaseCharacter2.visible = False
+
+PurchaseCharacter3Body = Rect(40, 320, 40, 40, fill=gradient('white', 'aqua', start='top'))
+
+PurchaseCharacter3 = Group(
+    PurchaseCharacter3Body,
+    Circle(45, 345, 4),
+    Circle(75, 345, 4),
+    Rect(50, 350, 20, 3),
+    Label("25 Coins", PurchaseCharacter3Body.centerX, PurchaseCharacter3Body.centerY + 30, fill = "white", size = 15, bold = True)
+    )
+PurchaseCharacter3.visible = False
+PurchaseCharacter3.centerX = 150
+PurchaseCharacter3.centerY = 160
+
+PurchaseCharacter4Body = Rect(40, 320, 40, 40, fill=gradient('lime', 'aqua', start='top'))
+
+PurchaseCharacter4 = Group(
+    PurchaseCharacter4Body,
+    Circle(45, 335, 10, fill='white'),
+    Circle(47, 330, 4),
+    Circle(75, 330, 10, fill='white'),
+    Circle(70, 335, 4),
+    Circle(60, 350, 5),
+    Label("25 Coins", PurchaseCharacter4Body.centerX, PurchaseCharacter4Body.centerY + 30, fill = "white", size = 15, bold = True)
+    )
+PurchaseCharacter4.centerX = 250
+PurchaseCharacter4.centerY = 160
+PurchaseCharacter4.visible = False
+
+PurchaseCharacter5Body = Rect(200, 200, 40, 40, fill = "green")
+
+PurchaseCharacter5 = Group(
+    PurchaseCharacter5Body,
+    Rect(205, 205, 10, 10, fill = "black"),
+    Rect(225, 205, 10, 10, fill = "black"),
+    Rect(210, 220, 5, 15),
+    Rect(210, 220, 20, 5),
+    Rect(225, 225, 5, 10),
+    Rect(215, 215, 10, 13),
+    Label("25 Coins", PurchaseCharacter5Body.centerX, PurchaseCharacter5Body.centerY + 30, fill = "white", size = 15, bold = True)
+    )
+
+PurchaseCharacter5.centerX = PurchaseCharacter1.centerX
+PurchaseCharacter5.centerY = PurchaseCharacter1.centerY + 100
+PurchaseCharacter5.visible = False
+
+PurchaseCharacter6Body = Rect(200, 200, 40, 40, fill = rgb(241, 194, 125))
+
+PurchaseCharacter6 = Group(
+    PurchaseCharacter6Body,
+    Rect(200, 210, 40, 5, fill = "gold"),
+    Rect(200, 200, 40, 10, fill = "dodgerblue"),
+    Rect(210,197,20, 5, fill = "gold"),
+    Oval(215, 220, 10, 15, fill = "white", rotateAngle = 15),
+    Oval(225, 220, 10, 15, fill = "white", rotateAngle = -15),
+    Circle(217, 220, 1.5),
+    Circle(223, 220, 1.5),
+    Oval(220, 233, 12, 7, fill = None, border = "black", borderWidth = 1),
+    Rect(213, 233, 20, 7, fill = rgb(241, 194, 125)),
+    Label("25 Coins", PurchaseCharacter6Body.centerX, PurchaseCharacter6Body.centerY + 30, fill = "white", bold = True, size = 15)
+    )
+    
+PurchaseCharacter6.centerX = 150
+PurchaseCharacter6.centerY = PurchaseCharacter1.centerY + 100
+PurchaseCharacter6.visible = False
+
+PurchaseCharacter7Body = Rect(200, 200, 40, 40, fill = rgb(250, 182, 167))
+
+PurchaseCharacter7 = Group(
+    PurchaseCharacter7Body,
+    Polygon(200,200,200,210,205, 205, 240, 205, 240, 200, 200, 200, fill = rgb(118, 50, 11)),
+    Circle(229, 215, 7, fill = "white", border = "black", borderWidth = 1),
+    Oval(221, 227, 15, 10, border = "black", fill = rgb(250, 182, 167), borderWidth = 1),
+    Rect(221, 223, 10, 5, fill = rgb(250, 182, 167)),
+    Rect(209, 223, 10, 5, fill = rgb(250, 182, 167)),
+    Oval(225, 222, 15,10, border = "black", fill = rgb(250,182,167), borderWidth = 1),
+    Rect(215, 215, 8, 15, fill = rgb(250, 182, 167)),
+    Circle(212, 215, 7, fill = "white", border = "black", borderWidth = 1),
+    Line(218, 214, 223, 214, lineWidth = 1),
+    Circle(213, 215, 2),
+    Circle(229, 215, 2),
+    Line(227, 229, 229, 232, lineWidth = 1),
+    Line(229, 232, 226, 235, lineWidth = 1),
+    Circle(223, 236, 3.5, fill = None, border = "black", borderWidth = 1),
+    Circle(217, 236, 3.5, fill = None, border = "black", borderWidth = 1),
+    Polygon(212, 235, 217, 237, 223, 236, 225, 235,225, 233, 223, 233, 220, 233, 213, 232, 212, 235, fill = rgb(250, 182, 167)),
+    Label("25 Coins", PurchaseCharacter7Body.centerX, PurchaseCharacter7Body.centerY + 30, fill = "white", bold = True, size = 15)
+    )
+
+PurchaseCharacter7.centerX = 250
+PurchaseCharacter7.centerY = PurchaseCharacter1.centerY + 100
+
+PurchaseCharacter8Body = Circle(220,223, 17)
+
+PurchaseCharacter8 = Group(
+    Rect(200, 200, 40, 40, fill = "white"),
+    PurchaseCharacter8Body,
+    Circle(205, 210, 10),
+    Circle(235, 210, 10),
+    Oval(216, 218, 10, 15, fill = "white"),
+    Oval(224, 218, 10, 15, fill = "white"),
+    Oval(220, 230, 22, 15, fill = "white"),
+    Oval(217, 218, 5, 10),
+    Oval(223, 218, 5, 10),
+    Oval(220, 232, 15, 5, fill = None, border = "black", borderWidth = 1),
+    Rect(210, 228, 16, 3, fill = "white"),
+    Oval(220, 227, 10, 5),
+    Label("25 Coins", PurchaseCharacter8Body.centerX, PurchaseCharacter8Body.centerY + 30, fill = "white", bold = True, size = 15)
+    )
+
+PurchaseCharacter8.centerX = 350
+PurchaseCharacter8.centerY = PurchaseCharacter1.centerY + 100
+PurchaseCharacter8.visible = False
+
+#InstructionsSTUFF
+Instructions = Group(
+    Label("INSTRUCTIONS", 200, 35, fill = "white", bold = True, size = 30, border = "violet"),
+    Label("Traverse five fun filled levels", 200, 100, fill = "white", bold = False, size = 20, border = rgb(255, 0, 0)),
+    Label("as a cool one eyed red square", 200, 120, fill = "white", bold = False, size = 20, border = "Orange"),
+    Label("while avoiding dangerous obstacles!", 200, 140, fill = "white", bold = False, size = 20, border = "Yellow"),
+    Label("Use WASD or arrow keys to move!", 200, 160, fill = "white", bold = False, size = 20, border = "Green"),
+    Label("You have five lives and if you", 200, 180, fill = "white", bold = False, size = 20, border = "Blue"),
+    Label("lose them all then you will have to", 200, 200, fill = "white", bold = False, size = 20, border = "Indigo"),
+    Label("restart from the beginning!", 200, 220, fill = "white", bold = False, size = 20, border = "violet"),
+    Label("Good Luck!", 200, 240, fill = "white", bold = False, size = 20, border = "red"),
+    )
+
+InstructionsPlayerRect = Rect(160,320,40,40, fill = gradient("firebrick", "maroon", start = "left"))
+InstructionsPlayerRect.centerX = 200
+InstructionsPlayerRect.centerY = 315
+InstructionsPlayerEye = Circle(InstructionsPlayerRect.centerX, InstructionsPlayerRect.centerY, 15, fill = "white")
+InstructionsPlayerPupil = Circle(InstructionsPlayerRect.centerX, InstructionsPlayerRect.centerY - 7, 7)
+
+InstructionsPlayer = Group(InstructionsPlayerRect, InstructionsPlayerEye, InstructionsPlayerPupil)
+
+BackRect = Rect(140,350,120,30, fill = gradient("firebrick", "maroon", start = "left"))
+BackRectText = Label("BACK", BackRect.centerX, BackRect.centerY, size = 25, bold = True, fill = "white")
+BackRect2 = Rect(140,350,120,30, fill = gradient("firebrick", "maroon", start = "left"))
+BackRectText2 = Label("BACK", BackRect.centerX, BackRect.centerY, size = 25, bold = True, fill = "white")
+BackButton = Group(BackRect, BackRectText)
+BackButton2 = Group(BackRect2, BackRectText2)
+
+Instructions.centerX = 200
+Instructions.centerY = 175
+
+Instructions.visible = False
+InstructionsPlayer.visible = False
+BackButton.visible = False
+
+
+#LEVELS STUFF
+Sun = Circle(0,0,100, fill = gradient("gold", "orange", "white", start = "bottom-right"))
+
+Obstacles = Group()
+MovingObstacles = Group()
+Ground = Group()
+
+HealthPacks = Group()
+Coins = Group()
+FloatyThings1 = Group()
+FloatyThings2 = Group()
+FloatyThings3 = Group()
+FloatyThings4 = Group()
+FloatyThings5 = Group()
+
+Props = Group()
+
+
+#Sandbox Stuff
+SandboxProps = Group()
+SandboxObstacles = Group()
+GrassProps = Group()
+SandboxGround = Group()
+
+MovingObstacles.speedX = 0
+MovingObstacles.speedY = 0
+
+SandboxPlayTestRect = Rect(360, 0, 40, 40, fill = "darkgrey", border = "white", borderWidth = 3)
+SandboxPlayTestText = Label("PLAY", SandboxPlayTestRect.centerX, SandboxPlayTestRect.centerY, fill = "white", bold = True, size = 10)
+SandboxPlayTest = Group(SandboxPlayTestRect, SandboxPlayTestText)
+SandboxPlayTest.visible = False
+
+SandboxReturnRect = Rect(0, 0, 40, 40, fill = "darkgrey", border = "white", borderWidth = 3)
+SandboxReturnText = Label("RETURN", SandboxReturnRect.centerX, SandboxReturnRect.centerY, fill = "white", bold = True, size = 8)
+SandboxReturn = Group(SandboxReturnRect, SandboxReturnText)
+SandboxReturn.visible = False
+
+Coins.speedY = 0
+
+SandboxBG1 = Rect(40, 0, 320, 40, fill = "dimgray")
+SandboxBG2 = Rect(45, 5, 310, 30, fill = "Gray")
+SandboxBGText = Label("TOOLS", 200, 20, fill = "white", bold = True, size = 20)
+SandboxBG = Group(SandboxBG1, SandboxBG2, SandboxBGText)
+SandboxBG.visible = False
+
+EraserBlock = Group(
+    Line(75, 8, 50, 33, lineWidth = 5, fill = "red"),
+    Line(50, 8, 75, 33, lineWidth = 5, fill = "red")
+    )
+EraserBlock.visible = False
+LavaBlock = Rect(87, 8, 25, 25, fill = "firebrick", visible = False)
+SpikeBlock = Polygon(125, 33, 140, 8, 155, 33, fill = "black", visible = False)
+WoodBlock = Rect(245, 8, 25, 25, fill = "saddlebrown", visible = False)
+TreeBlock = Group(
+    Line(300, 18, 300, 35, fill = "saddlebrown", lineWidth = 7),
+    Circle(300, 14, 10, fill = "green")
+    )
+TreeBlock.visible = False
+UncutGrassesBlock = Group(
+    Line(329, 21, 338, 37, lineWidth = 4, fill = "green"),
+    Line(338, 37, 340, 16, lineWidth = 4, fill = "green"),
+    Line(338, 37, 349, 27, lineWidth = 4, fill = "green")
+    )
+UncutGrassesBlock.visible = False
+UncutGrassesBlock.centerY -= 4
+
+LavaBlockHover = Rect(40, 240, 40, 40, fill = "firebrick", visible = False)
+SpikeBlockHover = Polygon(120, 320, 140, 280, 160, 320, fill = gradient("grey", "dimgrey", start = "left"), visible = False)
+WoodBlockHover = Rect(40, 240, 40, 40 ,fill = "saddlebrown", visible = False)
+TreeHover = Group(
+    Rect(120, 120, 25, 80, fill = "saddlebrown"),
+    Circle(131, 115, 40, fill = "green")    
+    )
+TreeHover.visible = False
+
+UncutGrassesHover = Group(
+    Line(43, 215, 57, 236, fill = "green", lineWidth = 5),
+    Line(57, 236, 63, 218, fill = "green", lineWidth = 5),
+    Line(57, 236, 73, 230, fill = "green", lineWidth = 5)
+    )
+UncutGrassesHover.visible = False
+UncutGrassesHover.rotateAngle = -15
+EraserHover = Group(
+    Line(75, 8, 50, 33, lineWidth = 5, fill = "red"),
+    Line(50, 8, 75, 33, lineWidth = 5, fill = "red")
+    )
+    
+EraserHover.visible = False    
+    
+
+
+
+#TextStuff
+Level = Label("Loading", 40, 20, fill = "black", bold = True, size = 20, visible = False)
+CoinsText = Label("Coins:", 320, 20, fill = "black", bold = True, size = 20, visible = False)
+CoinsValue = Label(0, 365, 20, fill = "black", bold = True, size = 20, visible = False)
+LivesText = Label("Lives:", 320, 40, fill = "black", bold = True, size = 20, visible = False)
+LivesValue = Label(55, 365, 40, fill = "black", bold = True, size = 20, visible = False)
+
+CoinsValueShop = Label(CoinsValue.value, CoinsTextShop.centerX + 55, CoinsTextShop.centerY, fill = "white", bold = True, size = 20, visible = False)
+
+
+#PLAYERSTUFF
+PlayerBody = Rect(40, 280, 40, 40, fill = gradient("firebrick", "maroon", start = "left"))
+Player = Group()
+Player.add(
+    PlayerBody,
+    Circle(PlayerBody.centerX, PlayerBody.centerY, 15, fill = "white"),
+    Circle(PlayerBody.centerX, PlayerBody.centerY, 7)
+    )
+Player.visible = False
+
+Player.centerY = 200
+Player.centerX = 20
+Player.speedY = 0
+
+SandboxPlayerBody = Rect(40, 280, 40, 40, fill = gradient("firebrick", "maroon", start = "left"))
+SandboxPlayer = Group()
+SandboxPlayer.add(
+    SandboxPlayerBody,
+    Circle(SandboxPlayerBody.centerX, SandboxPlayerBody.centerY, 15, fill = "white"),
+    Circle(SandboxPlayerBody.centerX, SandboxPlayerBody.centerY, 7)
+    )
+SandboxPlayer.visible = False
+
+SandboxPlayer.centerY = -1000
+SandboxPlayer.centerX = 20
+SandboxPlayer.speedY = 0
+
+#Functions
+
+
+
+def onMousePress(mouseX, mouseY):
+    
+    #SandboxTools
+    if InstructionsButton.hits(mouseX, mouseY) and InstructionsButton.visible == True:
+        print("Instructions")
+        InstructionsButton.visible = False
+        
+    if PlayButton.hits(mouseX, mouseY) and PlayButton.visible == True:
+        Player.centerX = 20
+        Player.centerY = 250
+        print("Play")
+        InstructionsButton.visible = False
+        PlayButton.centerX += 0.1
+        LivesValue.value = 5
+        Sun.centerX = 0
+        Sun.centerY = 0
+        Level.fill = "black"
+        CoinsValue.fill = "black"
+        CoinsText.fill = "black"
+        LivesValue.fill = "black"
+        LivesText.fill = "black"
+        Sun.fill = gradient("gold", "orange", "white", start = "bottom-right")
+
+    if BackButton.hits(mouseX, mouseY) and BackButton.visible == True:
+        print("Back")
+        InstructionsButton.visible = True
+        
+    if Shop.hits(mouseX, mouseY) and Shop.visible == True:
+        print("Shop")
+        InstructionsButton.centerX += 0.01
+        
+    if BackButton2.hits(mouseX, mouseY) and BackButton2.visible == True:
+        InstructionsButton.centerX = 200
+        Title.visible = True
+        TitleScreenPlayer.visible = True
+        PlayButton.visible = True
+        InstructionsButton.visible = True
+        
+    if ReturnButton.hits(mouseX, mouseY) and ReturnButton.visible == True:
+        if PlayButton.centerX != 200:
+            PlayButton.centerX = 200
+            InstructionsButton.visible = True
+            ReturnButton.visible = False
+            YouLosePlayer.visible = False
+            YouWin.visible = False
+        
+
+
+        
+    if SpikeBlock.hits(mouseX, mouseY) and SpikeBlock.visible == True:
+        SpikeBlockHover.centerX = mouseX
+        SpikeBlockHover.centerY = mouseY
+        SpikeBlockHover.visible = True
+        LavaBlockHover.visible = False
+        WoodBlockHover.visible = False
+        TreeHover.visible = False
+        UncutGrassesHover.visible = False
+        EraserHover.visible = False
+    elif SpikeBlockHover.visible == True:
+        SandboxObstacles.add(Polygon(mouseX - 20, mouseY + 20, mouseX, mouseY - 20, mouseX + 20, mouseY + 20, fill = gradient("grey", "dimgrey", start = "left")))
+        
+    if SandboxPlayTest.hits(mouseX, mouseY) and SandboxPlayTest.visible == True and SandboxPlayTestText.value == "PLAY":
+        SandboxPlayer.visible = True
+        SandboxPlayer.centerY = 200
+        SandboxPlayTestText.value = "PAUSE"
+ 
+        
+    elif SandboxPlayTest.hits(mouseX, mouseY) and SandboxPlayTest.visible == True and SandboxPlayTestText.value == "PAUSE":
+        SandboxPlayer.visible = False
+        SandboxPlayer.centerY = 200
+        SandboxPlayer.centerX = 20
+        SandboxPlayTestText.value = "PLAY"
+        
+    if WoodBlock.hits(mouseX, mouseY) and WoodBlock.visible == True:
+        WoodBlockHover.centerX = mouseX
+        WoodBlockHover.centerY = mouseY
+        WoodBlockHover.visible = True
+        SpikeBlockHover.visible = False
+        LavaBlockHover.visible = False
+        WoodBlockHover.visible = True
+        TreeHover.visible = False
+        UncutGrassesHover.visible = False
+        EraserHover.visible = False
+
+    elif WoodBlockHover.visible == True:
+        SandboxProps.add(
+            Rect(mouseX - 20, mouseY - 20, 40, 40, fill = "saddlebrown")
+            )
+            
+    if EraserBlock.hits(mouseX, mouseY) and EraserBlock.visible == True:
+        EraserHover.centerX = mouseX
+        EraserHover.centerY = mouseY
+        EraserHover.visible = True
+        WoodBlockHover.visible = False
+        UncutGrassesHover.visible = False
+        SpikeBlockHover.visible = False
+        TreeHover.visible = False
+        LavaBlockHover.visible = False
+    elif EraserHover.visible == True:
+        if EraserHover.hitsShape(SandboxProps):
+            print("Works")
+            for SandboxProp in SandboxProps:
+                if EraserHover.hitsShape(SandboxProp):
+                    SandboxProps.remove(SandboxProp)
+        if EraserHover.hitsShape(SandboxObstacles):
+            print("Works")
+            for SandboxObstacle in SandboxObstacles:
+                if EraserHover.hitsShape(SandboxObstacle):
+                    SandboxObstacles.remove(SandboxObstacle)
+        if EraserHover.hitsShape(GrassProps):
+            print("Works")
+            for GrassProp in GrassProps:
+                if EraserHover.hitsShape(GrassProp):
+                    GrassProps.remove(GrassProp)
+        
+    
+    if UncutGrassesBlock.hits(mouseX, mouseY) and UncutGrassesBlock.visible == True:
+        UncutGrassesHover.centerX = mouseX
+        UncutGrassesHover.centerY = mouseY
+        UncutGrassesHover.visible = True
+        SpikeBlockHover.visible = False
+        LavaBlockHover.visible = False
+        TreeHover.visible = False
+        WoodBlockHover.visible = False
+        EraserHover.visible = False
+
+    elif UncutGrassesHover.visible == True:
+        GrassProps.add(
+            Line(mouseX - 19, 303, mouseX, 320, fill = "green", lineWidth = 5),
+            Line(mouseX + 1, 301, mouseX, 320, fill = "green", lineWidth = 5),
+            Line(mouseX + 14, 310, mouseX, 320, fill = "green", lineWidth = 5)
+            )
+            
+    if TreeBlock.hits(mouseX, mouseY) and TreeBlock.visible == True:
+        TreeHover.centerX = mouseX
+        TreeHover.centerY = mouseY
+        TreeHover.visible = True
+        SpikeBlockHover.visible = False
+        LavaBlockHover.visible = False
+        WoodBlockHover.visible = False
+        UncutGrassesHover.visible = False
+        EraserHover.visible = False
+
+    elif TreeHover.visible == True:
+        SandboxProps.add(
+            Rect(mouseX - 12.5, 240, 25, 80, fill = "saddlebrown"),
+            Circle(mouseX, 235, 40, fill = "green")
+            )
+        
+        
+    if LavaBlock.hits(mouseX, mouseY) and LavaBlock.visible == True:
+        LavaBlockHover.centerX = mouseX
+        LavaBlockHover.centerY = mouseY
+        LavaBlockHover.visible = True
+        SpikeBlockHover.visible = False
+        WoodBlockHover.visible = False
+        TreeHover.visible = False
+        UncutGrassesHover.visible = False
+        EraserHover.visible = False
+
+    elif LavaBlockHover.visible == True:
+        SandboxObstacles.add(
+            Rect(mouseX - 20, mouseY - 20, 40, 40, fill = "firebrick")
+            )
+            
+    if SandboxReturn.hits(mouseX, mouseY) and SandboxReturn.visible == True:
+        Sandbox.centerX = 52.5
+        SandboxGround.clear()
+        SandboxProps.clear()
+        SandboxObstacles.clear()
+        GrassProps.clear()
+        SpikeBlockHover.visible = False
+        LavaBlockHover.visible = False
+        WoodBlockHover.visible = False
+        TreeHover.visible = False
+        UncutGrassesHover.visible = False
+        EraserHover.visible = False
+    
+    #Character Stuff
+    
+    if PurchaseCharacter1.hits(mouseX, mouseY) and PurchaseCharacter1.visible == True:
+        if PurchaseCharacter1Bought.value == 1:
+            if CoinsValue.value >= 25:
+                SelectedCharacterRect.centerX = PurchaseCharacter1.centerX
+                SelectedCharacterRect.centerY = PurchaseCharacter1.centerY - 5
+                CoinsValue.value -= 25
+                PurchaseCharacter1Bought.value = 2
+                Player.clear()
+                Player.add(
+                    Rect(40, 280, 40, 40, fill= gradient("firebrick", "maroon", start = "left")),
+                    Polygon(40, 320, 60, 280, 80, 320, fill='white'),
+                    Circle(60, 300, 8, fill='black'),
+                    )
+        elif PurchaseCharacter1Bought.value == 2:
+            Player.clear()
+            SelectedCharacterRect.centerX = PurchaseCharacter1.centerX
+            SelectedCharacterRect.centerY = PurchaseCharacter1.centerY - 5
+            Player.add(
+                Rect(40, 280, 40, 40, fill= gradient("firebrick", "maroon", start = "left")),
+                Polygon(40, 320, 60, 280, 80, 320, fill='white'),
+                Circle(60, 300, 8, fill='black'),
+                )
+            
+    #Character Selection Code
+    if DefaultCharacterPurchase.hits(mouseX, mouseY) and DefaultCharacterPurchase.visible == True:
+        SelectedCharacterRect.centerX = DefaultCharacterPurchase.centerX
+        SelectedCharacterRect.centerY = DefaultCharacterPurchase.centerY
+        
+        Player.clear()
+        
+        Player.add(
+            Rect(40, 280, 40, 40, fill = gradient("firebrick", "maroon", start = "left")),
+            Circle(60, 300, 15, fill = "white"),
+            Circle(60, 300, 7)            
+            )
+    
+    if PurchaseCharacter2.hits(mouseX, mouseY) and PurchaseCharacter2.visible == True:
+        if PurchaseCharacter2Bought.value == 1:
+            if CoinsValue.value >= 25:
+                CoinsValue.value -= 25
+                SelectedCharacterRect.centerX = PurchaseCharacter2.centerX
+                SelectedCharacterRect.centerY = PurchaseCharacter2.centerY - 5
+                Player.clear()
+                PurchaseCharacter2Bought.value = 2
+                Player.add(
+                    Rect(80, 80, 40, 40, fill = rgb(204, 27, 35)),
+                    Polygon(97, 95, 87, 85, 84, 101, 89, 110, 99, 105, 97, 95),
+                    Polygon(101, 105, 103, 95, 113, 85, 116, 101, 111, 110, 101, 105),
+                    Polygon(104, 100, 113, 96, 110, 102, 104, 100, fill = "white"),
+                    Polygon(87, 96, 96, 100, 90, 102, 87, 96, fill = "white")
+                    )
+        elif PurchaseCharacter2Bought.value == 2:
+            Player.clear()
+            SelectedCharacterRect.centerX = PurchaseCharacter2.centerX
+            SelectedCharacterRect.centerY = PurchaseCharacter2.centerY - 5
+            Player.add(
+                Rect(80, 80, 40, 40, fill = rgb(204, 27, 35)),
+                Polygon(97, 95, 87, 85, 84, 101, 89, 110, 99, 105, 97, 95),
+                Polygon(101, 105, 103, 95, 113, 85, 116, 101, 111, 110, 101, 105),
+                Polygon(104, 100, 113, 96, 110, 102, 104, 100, fill = "white"),
+                Polygon(87, 96, 96, 100, 90, 102, 87, 96, fill = "white")
+                )
+    
+    if PurchaseCharacter3.hits(mouseX, mouseY) and PurchaseCharacter3.visible == True:
+        if PurchaseCharacter3Bought.value == 1:
+            if CoinsValue.value >= 25:
+                SelectedCharacterRect.centerX = PurchaseCharacter3.centerX
+                SelectedCharacterRect.centerY = PurchaseCharacter3.centerY - 5
+                CoinsValue.value -= 25
+                Player.clear()
+                PurchaseCharacter3Bought.value = 2
+                Player.add(
+                    Rect(40, 320, 40, 40, fill=gradient('white', 'aqua', start='top')),
+                    Circle(45, 345, 4),
+                    Circle(75, 345, 4),
+                    Rect(50, 350, 20, 3)
+                    )
+        elif PurchaseCharacter3Bought.value == 2:
+            Player.clear()
+            SelectedCharacterRect.centerX = PurchaseCharacter3.centerX
+            SelectedCharacterRect.centerY = PurchaseCharacter3.centerY - 5
+            Player.add(
+                Rect(40, 320, 40, 40, fill=gradient('white', 'aqua', start='top')),
+                Circle(45, 345, 4),
+                Circle(75, 345, 4),
+                Rect(50, 350, 20, 3)
+                )
+                
+                
+    if PurchaseCharacter4.hits(mouseX, mouseY) and PurchaseCharacter4.visible == True:
+        if PurchaseCharacter4Bought.value == 1:
+            if CoinsValue.value >= 25:
+                CoinsValue.value -= 25
+                SelectedCharacterRect.centerX = PurchaseCharacter4.centerX
+                SelectedCharacterRect.centerY = PurchaseCharacter4.centerY - 5
+                Player.clear()
+                PurchaseCharacter4Bought.value = 2
+                Player.add(
+                    Rect(40, 320, 40, 40, fill=gradient('lime', 'aqua', start='top')),
+                    Circle(45, 335, 10, fill='white'),
+                    Circle(47, 330, 4),
+                    Circle(75, 330, 10, fill='white'),
+                    Circle(70, 335, 4),
+                    Circle(60, 350, 5)
+                    )
+        elif PurchaseCharacter4Bought.value == 2:
+            Player.clear()
+            SelectedCharacterRect.centerX = PurchaseCharacter4.centerX
+            SelectedCharacterRect.centerY = PurchaseCharacter4.centerY - 5
+            Player.add(
+                Rect(40, 320, 40, 40, fill=gradient('lime', 'aqua', start='top')),
+                Circle(45, 335, 10, fill='white'),
+                Circle(47, 330, 4),
+                Circle(75, 330, 10, fill='white'),
+                Circle(70, 335, 4),
+                Circle(60, 350, 5)
+                )
+    
+    if PurchaseCharacter5.hits(mouseX, mouseY) and PurchaseCharacter5.visible == True:
+        if PurchaseCharacter5Bought.value == 1:
+            if CoinsValue.value >= 25:
+                CoinsValue.value -= 25
+                SelectedCharacterRect.centerX = PurchaseCharacter5.centerX
+                SelectedCharacterRect.centerY = PurchaseCharacter5.centerY - 5
+                Player.clear()
+                PurchaseCharacter5Bought.value = 2
+                Player.add(
+                    Rect(200, 200, 40, 40, fill = "green"),
+                    Rect(205, 205, 10, 10, fill = "black"),
+                    Rect(225, 205, 10, 10, fill = "black"),
+                    Rect(210, 220, 5, 15),
+                    Rect(210, 220, 20, 5),
+                    Rect(225, 225, 5, 10),
+                    Rect(215, 215, 10, 13)
+                    )
+        elif PurchaseCharacter5Bought.value == 2:
+            Player.clear()
+            SelectedCharacterRect.centerX = PurchaseCharacter5.centerX
+            SelectedCharacterRect.centerY = PurchaseCharacter5.centerY - 5
+            Player.add(
+                Rect(200, 200, 40, 40, fill = "green"),
+                Rect(205, 205, 10, 10, fill = "black"),
+                Rect(225, 205, 10, 10, fill = "black"),
+                Rect(210, 220, 5, 15),
+                Rect(210, 220, 20, 5),
+                Rect(225, 225, 5, 10),
+                Rect(215, 215, 10, 13)
+                )
+           
+    if PurchaseCharacter6.hits(mouseX, mouseY) and PurchaseCharacter6.visible == True:
+        if PurchaseCharacter6Bought.value == 1:
+            if CoinsValue.value >= 25:
+                CoinsValue.value -= 25
+                SelectedCharacterRect.centerX = PurchaseCharacter6.centerX
+                SelectedCharacterRect.centerY = PurchaseCharacter6.centerY - 5
+                Player.clear()
+                PurchaseCharacter6Bought.value = 2
+                Player.add(
+                    Rect(200, 200, 40, 40, fill = rgb(241, 194, 125)),
+                    Rect(200, 210, 40, 5, fill = "gold"),
+                    Rect(200, 200, 40, 10, fill = "dodgerblue"),
+                    Rect(210,197,20, 5, fill = "gold"),
+                    Oval(215, 220, 10, 15, fill = "white", rotateAngle = 15),
+                    Oval(225, 220, 10, 15, fill = "white", rotateAngle = -15),
+                    Circle(217, 220, 1.5),
+                    Circle(223, 220, 1.5),
+                    Oval(220, 233, 12, 7, fill = None, border = "black", borderWidth = 1),
+                    Rect(213, 233, 20, 7, fill = rgb(241, 194, 125))
+                    )
+        elif PurchaseCharacter6Bought.value == 2:
+            Player.clear()
+            SelectedCharacterRect.centerX = PurchaseCharacter6.centerX
+            SelectedCharacterRect.centerY = PurchaseCharacter6.centerY - 5
+            Player.add(
+                Rect(200, 200, 40, 40, fill = rgb(241, 194, 125)),
+                Rect(200, 210, 40, 5, fill = "gold"),
+                Rect(200, 200, 40, 10, fill = "dodgerblue"),
+                Rect(210,197,20, 5, fill = "gold"),
+                Oval(215, 220, 10, 15, fill = "white", rotateAngle = 15),
+                Oval(225, 220, 10, 15, fill = "white", rotateAngle = -15),
+                Circle(217, 220, 1.5),
+                Circle(223, 220, 1.5),
+                Oval(220, 233, 12, 7, fill = None, border = "black", borderWidth = 1),
+                Rect(213, 233, 20, 7, fill = rgb(241, 194, 125))
+                )
+
+    if PurchaseCharacter7.hits(mouseX, mouseY) and PurchaseCharacter7.visible == True:
+        if PurchaseCharacter7Bought.value == 1:
+            if CoinsValue.value >= 25:
+                CoinsValue.value -= 25
+                SelectedCharacterRect.centerX = PurchaseCharacter7.centerX
+                SelectedCharacterRect.centerY = PurchaseCharacter7.centerY - 5
+                Player.clear()
+                PurchaseCharacter7Bought.value = 2
+                Player.add(
+                    Rect(200, 200, 40, 40, fill = rgb(250, 182, 167)),
+                    Polygon(200,200,200,210,205, 205, 240, 205, 240, 200, 200, 200, fill = rgb(118, 50, 11)),
+                    Circle(229, 215, 7, fill = "white", border = "black", borderWidth = 1),
+                    Oval(221, 227, 15, 10, border = "black", fill = rgb(250, 182, 167), borderWidth = 1),
+                    Rect(221, 223, 10, 5, fill = rgb(250, 182, 167)),
+                    Rect(209, 223, 10, 5, fill = rgb(250, 182, 167)),
+                    Oval(225, 222, 15,10, border = "black", fill = rgb(250,182,167), borderWidth = 1),
+                    Rect(215, 215, 8, 15, fill = rgb(250, 182, 167)),
+                    Circle(212, 215, 7, fill = "white", border = "black", borderWidth = 1),
+                    Line(218, 214, 223, 214, lineWidth = 1),
+                    Circle(213, 215, 2),
+                    Circle(229, 215, 2),
+                    Line(227, 229, 229, 232, lineWidth = 1),
+                    Line(229, 232, 226, 235, lineWidth = 1),
+                    Circle(223, 236, 3.5, fill = None, border = "black", borderWidth = 1),
+                    Circle(217, 236, 3.5, fill = None, border = "black", borderWidth = 1),
+                    Polygon(212, 235, 217, 237, 223, 236, 225, 235,225, 233, 223, 233, 220, 233, 213, 232, 212, 235, fill = rgb(250, 182, 167))
+                    )
+        elif PurchaseCharacter7Bought.value == 2:
+            Player.clear()
+            SelectedCharacterRect.centerX = PurchaseCharacter7.centerX
+            SelectedCharacterRect.centerY = PurchaseCharacter7.centerY - 5
+            Player.add(
+                Rect(200, 200, 40, 40, fill = rgb(250, 182, 167)),
+                Polygon(200,200,200,210,205, 205, 240, 205, 240, 200, 200, 200, fill = rgb(118, 50, 11)),
+                Circle(229, 215, 7, fill = "white", border = "black", borderWidth = 1),
+                Oval(221, 227, 15, 10, border = "black", fill = rgb(250, 182, 167), borderWidth = 1),
+                Rect(221, 223, 10, 5, fill = rgb(250, 182, 167)),
+                Rect(209, 223, 10, 5, fill = rgb(250, 182, 167)),
+                Oval(225, 222, 15,10, border = "black", fill = rgb(250,182,167), borderWidth = 1),
+                Rect(215, 215, 8, 15, fill = rgb(250, 182, 167)),
+                Circle(212, 215, 7, fill = "white", border = "black", borderWidth = 1),
+                Line(218, 214, 223, 214, lineWidth = 1),
+                Circle(213, 215, 2),
+                Circle(229, 215, 2),
+                Line(227, 229, 229, 232, lineWidth = 1),
+                Line(229, 232, 226, 235, lineWidth = 1),
+                Circle(223, 236, 3.5, fill = None, border = "black", borderWidth = 1),
+                Circle(217, 236, 3.5, fill = None, border = "black", borderWidth = 1),
+                Polygon(212, 235, 217, 237, 223, 236, 225, 235,225, 233, 223, 233, 220, 233, 213, 232, 212, 235, fill = rgb(250, 182, 167))
+                )
+                
+    if PurchaseCharacter8.hits(mouseX, mouseY) and PurchaseCharacter8.visible == True:
+        if PurchaseCharacter8Bought.value == 1:
+            if CoinsValue.value >= 25:
+                CoinsValue.value -= 25
+                SelectedCharacterRect.centerX = PurchaseCharacter8.centerX
+                SelectedCharacterRect.centerY = PurchaseCharacter8.centerY - 5
+                Player.clear()
+                PurchaseCharacter8Bought.value = 2
+                Player.add(
+                    Rect(200, 200, 40, 40, fill = "white", opacity = 0),
+                    Circle(220,223, 17),
+                    Circle(205, 210, 10),
+                    Circle(235, 210, 10),
+                    Oval(216, 218, 10, 15, fill = "white"),
+                    Oval(224, 218, 10, 15, fill = "white"),
+                    Oval(220, 230, 22, 15, fill = "white"),
+                    Oval(217, 218, 5, 10),
+                    Oval(223, 218, 5, 10),
+                    Oval(220, 232, 15, 5, fill = None, border = "black", borderWidth = 1),
+                    Rect(210, 228, 16, 3, fill = "white"),
+                    Oval(220, 227, 10, 5)
+                    )
+        elif PurchaseCharacter8Bought.value == 2:
+            Player.clear()
+            SelectedCharacterRect.centerX = PurchaseCharacter8.centerX
+            SelectedCharacterRect.centerY = PurchaseCharacter8.centerY - 5
+            Player.add(
+                Rect(200, 200, 40, 40, fill = "white", opacity = 0),
+                Circle(220,223, 17),
+                Circle(205, 210, 10),
+                Circle(235, 210, 10),
+                Oval(216, 218, 10, 15, fill = "white"),
+                Oval(224, 218, 10, 15, fill = "white"),
+                Oval(220, 230, 22, 15, fill = "white"),
+                Oval(217, 218, 5, 10),
+                Oval(223, 218, 5, 10),
+                Oval(220, 232, 15, 5, fill = None, border = "black", borderWidth = 1),
+                Rect(210, 228, 16, 3, fill = "white"),
+                Oval(220, 227, 10, 5)
+                )       
+                   
+    
+    if Sandbox.hits(mouseX, mouseY) and Sandbox.visible == True:
+        Level.value = "Sandbox"
+        print(Sandbox.centerX)
+        Sandbox.centerX += .01
+        print(Level.value)
+        SandboxGround.add(
+            Rect(0, 320, 400, 80, fill = gradient("limegreen","limegreen", "forestgreen", "darkgreen", start = "left")),
+            Rect(0, 380, 400, 60, fill= gradient('saddleBrown', 'sienna','sienna', start='right'))            
+            )
+        
+        
+#Movement
+def onKeyHold(keys):
+    if "right" in keys or "d" in keys:
+        Player.centerX += 6
+        SandboxPlayer.centerX += 6
+    if "left" in keys or "a" in keys:
+        Player.centerX -= 6
+        SandboxPlayer.centerX -= 6
+
+#Sandbox Visible Stuff
+def onMouseMove(mouseX, mouseY):
+    if LavaBlockHover.visible == True:
+        LavaBlockHover.centerX = mouseX
+        LavaBlockHover.centerY = mouseY
+    if SpikeBlockHover.visible == True:
+        SpikeBlockHover.centerX = mouseX
+        SpikeBlockHover.centerY = mouseY
+    if WoodBlockHover.visible == True:
+        WoodBlockHover.centerX = mouseX
+        WoodBlockHover.centerY = mouseY
+    if TreeHover.visible == True:
+        TreeHover.centerX = mouseX
+        TreeHover.centerY = mouseY - 22.5
+    if UncutGrassesHover.visible == True:
+        UncutGrassesHover.centerX = mouseX - 3
+        UncutGrassesHover.centerY = mouseY - 9
+    if EraserHover.visible == True:
+        EraserHover.centerX = mouseX
+        EraserHover.centerY = mouseY
+
+        
+
+#MOVEMENT STUFF
+def onKeyPress(key):
+    if key == "up" or key == "space" or key == "w":
+        if Player.hitsShape(Ground) or Player.hitsShape(FloatyThings1) or Player.hitsShape(FloatyThings2) or Player.hitsShape(FloatyThings3) or Player.hitsShape(FloatyThings4) or Player.hitsShape(FloatyThings5):
+            Player.speedY -= 11
+        if SandboxPlayer.hitsShape(SandboxGround):
+            SandboxPlayer.speedY -= 11
+    if key == "l":
+        EraserHover.visible = False
+        SpikeBlockHover.visible = False
+        TreeHover.visible  = False
+        LavaBlockHover.visible = False
+        UncutGrassesHover.visible = False
+        WoodBlockHover.visible = False
+    
+def onStep():
+    #BG change 
+    CoinsValueShop.value = CoinsValue.value
+
+    MovingObstacles.centerY = MovingObstacles.centerY + MovingObstacles.speedY
+    MovingObstacles.centerX = MovingObstacles.centerX + MovingObstacles.speedX
+    Player.centerY = Player.centerY + Player.speedY
+    SandboxPlayer.centerY = SandboxPlayer.centerY + SandboxPlayer.speedY
+    
+    
+    if Sandbox.centerX != 52.5:
+
+        SandboxBG.visible = True
+        LavaBlock.visible = True
+        SpikeBlock.visible = True
+        WoodBlock.visible = True
+        TreeBlock.visible = True
+        EraserBlock.visible = True
+        UncutGrassesBlock.visible = True
+        SandboxPlayTest.visible = True
+        SandboxReturn.visible = True
+        
+    if Sandbox.centerX == 52.5 and PlayButton.centerX == 200:
+        SandboxBG.visible = False
+        LavaBlock.visible = False
+        SpikeBlock.visible = False
+        WoodBlock.visible = False
+        TreeBlock.visible = False
+        EraserBlock.visible = False
+        UncutGrassesBlock.visible = False
+        SandboxPlayTest.visible = False
+        SandboxReturn.visible = False
+        Level.value = "Loading"
+        SandboxPlayTestText.value = "PLAY"
+        
+
+        
+    if Level.value != "Level 4":
+        MovingObstacles.speedY = 0
+    if Level.value == "Level 4":
+        if MovingObstacles.centerY <= 310:
+            MovingObstacles.speedY = 2
+        if MovingObstacles.centerY >= 340:
+            MovingObstacles.speedY = -2
+
+            
+    if BackButton2.visible == True:
+        PurchaseCharacter1.visible = True
+        PurchaseCharacter2.visible = True
+        PurchaseCharacter3.visible = True
+        PurchaseCharacter4.visible = True
+        ShopText.visible = True
+        SelectedCharacterRect.visible = True
+        DefaultCharacterPurchase.visible = True
+        CoinsTextShop.visible = True
+        CoinsValueShop.visible = True
+        PurchaseCharacter5.visible = True
+        PurchaseCharacter6.visible = True
+        PurchaseCharacter7.visible = True
+        PurchaseCharacter8.visible = True
+    else:
+        PurchaseCharacter1.visible = False
+        PurchaseCharacter2.visible = False
+        PurchaseCharacter3.visible = False
+        PurchaseCharacter4.visible = False
+        ShopText.visible = False
+        SelectedCharacterRect.visible = False
+        DefaultCharacterPurchase.visible = False
+        CoinsTextShop.visible = False
+        CoinsValueShop.visible = False
+        PurchaseCharacter5.visible = False
+        PurchaseCharacter6.visible = False
+        PurchaseCharacter7.visible = False
+        PurchaseCharacter8.visible = False
+
+
+    if InstructionsButton.visible == True:
+        app.background = gradient(rgb(107,191,89), rgb(8,160,69), rgb(11, 110, 79), rgb(7,59,58), start = "top-left")
+        PlayButton.visible = True
+        TitleScreenPlayer.visible = True
+        Title.visible = True
+        BackButton.visible = False
+        Instructions.visible = False
+        InstructionsPlayer.visible = False
+        Sandbox.visible = True
+        Shop.visible = True
+        Sun.visible = False
+        BackButton2.visible = False
+        
+    if InstructionsButton.visible != True and PlayButton.centerX == 200:
+        app.background = "black"
+        PlayButton.visible = False
+        TitleScreenPlayer.visible = False
+        Title.visible = False
+        BackButton.visible = True
+        Instructions.visible = True
+        InstructionsPlayer.visible = True
+        Shop.visible = False
+        Sun.visible = False
+        BackButton2.visible = False
+        Sandbox.visible = False
+        
+    
+        
+    if InstructionsButton.visible == False and PlayButton.centerX != 200 and Level.value != "Level 3" and Level.value != "Level 4" and Level.value != "Level 5" and Level.value != "Level 6" and Level.value != "Level 7" and Level.value != "Level 8":
+        app.background = gradient("white", "mediumturquoise", start = "bottom")
+        PlayButton.visible = False
+        TitleScreenPlayer.visible = False
+        Title.visible = False
+        BackButton.visible = False
+        Instructions.visible = False
+        InstructionsPlayer.visible = False
+        Shop.visible = False
+        Sun.visible = True
+        BackButton2.visible = False
+        Sandbox.visible = False
+        
+    if InstructionsButton.centerX != 200:
+        app.background = "black"
+        PlayButton.visible = False
+        TitleScreenPlayer.visible = False
+        BackButton.visible = True
+        Instructions.visible = False
+        InstructionsButton.visible = False
+        Title.visible = False
+        InstructionsPlayer.visible = False
+        Shop.visible = False
+        Sun.visible = False
+        BackButton.visible = False
+        BackButton2.visible = True
+        Sandbox.visible = False
+        
+    if Sandbox.centerX != 52.5:
+        app.background = gradient(rgb(107,191,89), rgb(8,160,69), rgb(11, 110, 79), rgb(7,59,58), start = "top-left")
+        PlayButton.visible = False
+        TitleScreenPlayer.visible = False
+        Title.visible = False
+        BackButton.visible = False
+        Instructions.visible = False
+        InstructionsPlayer.visible = False
+        Sandbox.visible = False
+        Shop.visible = False
+        Sun.visible = False
+        BackButton2.visible = False
+        app.background = gradient("white", "mediumturquoise", start = "bottom")
+        InstructionsButton.visible = False
+    
+
+    #Levels   
+    if PlayButton.centerX != 200:
+        Level.visible = True
+        CoinsValue.visible = True
+        CoinsText.visible = True
+        LivesText.visible = True
+        LivesValue.visible = True
+        Ground.visible = True
+        Props.visible = True
+        if Level.value == "Loading":
+            Ground.add(
+                Rect(0, 320, 400, 80, fill = gradient("limegreen","limegreen", "forestgreen", "darkgreen", start = "left")),
+                Rect(0, 380, 400, 60, fill= gradient('saddleBrown', 'sienna','sienna', start='right'))
+                )
+            Obstacles.add(
+                Polygon(160,320,180,280,200,320, fill = gradient("grey", "dimgrey", start = "left")),
+                Polygon(320,320,340, 280,360,320, fill = gradient("grey", "dimgrey", start = "left"))
+                )
+            Coins.add(
+                Circle(250, 250, 20, fill = "goldenrod", border = "darkgoldenrod", borderWidth = 5),
+                Circle(100, 280, 20, fill = "goldenrod", border = "darkgoldenrod", borderWidth = 5)
+                )    
+                
+            Level.value = "Level 1"
+    if Player.hitsShape(Ground) != True and PlayButton.centerX != 200:
+        Player.speedY += 1
+    if Player.hitsShape(Ground):
+        Player.speedY = 0
+        Player.centerY = Ground.centerY - 80
+    if Player.centerY <= 250 and Player.hitsShape(FloatyThings1):
+        Player.speedY = 0
+        Player.centerY = FloatyThings1.centerY - 30
+    if Player.centerY <= 250 and Player.hitsShape(FloatyThings5):
+        Player.speedY = 0
+        Player.centerY = FloatyThings5.centerY - 25
+    if Player.centerY <= 200 and Player.hitsShape(FloatyThings2):
+        Player.speedY = 0
+        Player.centerY = FloatyThings2.centerY - 25
+    if Player.centerY <= 125 and Player.hitsShape(FloatyThings3):
+        Player.speedY = 0
+        Player.centerY = FloatyThings3.centerY - 25
+    if Player.centerY <= 50 and Player.hitsShape(FloatyThings4):
+        Player.speedY = 0
+        Player.centerY = FloatyThings4.centerY - 25
+    if SandboxPlayer.hitsShape(SandboxGround) != True:
+        SandboxPlayer.speedY += 1
+    if SandboxPlayer.hitsShape(SandboxGround):
+        SandboxPlayer.speedY = 0
+        SandboxPlayer.centerY = SandboxGround.centerY - 80
+    
+
+    if PlayButton.centerX == 200:
+        Player.centerY = 200
+        Player.centerX = 20
+        Player.visible = False
+        Ground.visible = False
+        Coins.visible = False
+        Obstacles.visible = False
+        Level.visible = False
+        CoinsText.visible = False
+        CoinsValue.visible = False
+        LivesText.visible = False
+        LivesValue.visible = False
+
+    
+    if PlayButton.centerX != 200 and Level.value == "Level 1":
+        Player.visible = True    
+        Ground.visible = True
+        Coins.visible = True
+        Obstacles.visible = True
+        Level.visible = True
+        CoinsText.visible = True
+        CoinsValue.visible = True
+        LivesText.visible = True
+        LivesValue.visible = True
+        
+    if Player.hitsShape(Obstacles):
+        Player.centerX = 20
+        Player.centerY = 290
+        LivesValue.value -= 1
+    if Player.hitsShape(MovingObstacles):
+        Player.centerX = 20
+        Player.centerY = 260
+        LivesValue.value -= 1
+        
+    if SandboxPlayer.hitsShape(SandboxObstacles):
+        SandboxPlayer.centerX = 20
+        SandboxPlayer.centerY = 290
+        
+    if Player.centerX <= 20:
+        Player.centerX = 20
+    if SandboxPlayer.centerX <= 20:
+        SandboxPlayer.centerX = 20
+    if SandboxPlayer.centerX >= 380:
+        SandboxPlayer.centerX = 380
+        
+    for coin in Coins:
+        if Player.hitsShape(coin):
+            Coins.remove(coin)
+            CoinsValue.value += 1
+    
+    for HealthPack in HealthPacks:
+        if Player.hitsShape(HealthPack):
+            HealthPacks.clear()
+            LivesValue.value += 2
+    
+    if LivesValue.value <= 0 and PlayButton.centerX != 200:
+        YouLosePlayer.visible = True
+        ReturnButton.visible = True
+        app.background = "black"
+        Obstacles.clear()
+        MovingObstacles.clear()
+        Ground.visible = False
+        Player.visible = False
+        HealthPacks.clear()
+        Coins.clear()
+        FloatyThings1.clear()
+        FloatyThings2.clear()
+        FloatyThings3.clear()
+        FloatyThings4.clear()
+        FloatyThings5.clear()
+
+        Props.clear()
+        
+        Sun.visible = False
+        
+        LivesValue.visible = False
+        LivesText.visible = False
+        
+        
+
+        
+        
+    if Player.centerX >= 400:
+        print("Works!")
+        Player.centerX = 20
+        if Level.value == "Level 1":
+            Sun.centerX = 0
+            Sun.centerY = 0
+            Player.centerX = 20
+            Obstacles.clear()
+            Ground.clear()
+            CoinsValue.value += 20
+            Ground.add(
+                Rect(0, 320, 400, 80, fill = gradient("limegreen", "limegreen", "forestgreen", "darkgreen", start = "left")),
+                Rect(0, 380, 400, 60, fill= gradient('saddleBrown', 'sienna','sienna', start='right'))
+                )
+            FloatyThings1.add(
+                Rect(150, 265, 40, 20, fill = gradient("chocolate", "sienna", start = "left")),
+                Rect(268, 265, 40, 20, fill = gradient("chocolate", "sienna", start = "left")),              
+                Rect(386, 265, 40, 20, fill = gradient("chocolate", "sienna", start = "left"))                
+                )
+            Obstacles.add(
+                Rect(132, 313, 268, 12, fill = gradient("red", "firebrick", start = "left"))
+                )
+            Props.add(
+                Line(169, 265, 169, -5, fill = "saddleBrown", lineWidth = 7),
+                Line(288, 265, 288, -5, fill = "saddleBrown", lineWidth = 7)
+                )
+            Coins.add(
+                Circle(223, 185, 20, fill = "goldenrod", border = "darkgoldenrod", borderWidth = 5),
+                Circle(343, 185, 20, fill = "goldenrod", border = "darkgoldenrod", borderWidth = 5)
+                )
+            Props.add(
+                Rect(133, 0, 400, 35, fill = gradient("chocolate", "sienna", start = "left"))
+                )
+            Level.value = "Level 2"
+
+
+
+        elif Level.value == "Level 2":
+            Sun.centerX = 200
+            Sun.centerY = 320
+            Level.fill = "white"
+            CoinsText.fill = "white"
+            CoinsValue.fill = "white"
+            LivesText.fill = "white"
+            LivesValue.fill = "white"
+
+            
+            Obstacles.clear()
+            Ground.clear()
+            FloatyThings1.clear()
+            Props.clear()
+            Coins.clear()
+            CoinsValue.value += 20
+            
+            Ground.add(
+                Rect(0, 320, 400, 80, fill = gradient("forestgreen", "darkgreen", start = "left")),
+                Rect(0, 380, 400, 60, fill= gradient('saddleBrown',"saddleBrown", start='right'))                
+                )
+                
+            Obstacles.add(
+                Rect(88, 300, 40, 25, fill = "firebrick"),
+                Rect(188, 300, 40, 25, fill = "firebrick"),
+                Rect(288, 300, 40, 25, fill = "firebrick"),                
+                Rect(388, 300, 40, 25, fill = "firebrick")                
+                )
+                
+            Coins.add(
+                Circle(205, 275, 20, fill = "goldenrod", border = "darkgoldenrod", borderWidth = 5)
+                )
+            Level.value = "Level 3"
+            
+        elif Level.value == "Level 3":
+            Obstacles.clear()
+            Ground.clear()
+            FloatyThings1.clear()
+            Props.clear()
+            Coins.clear()
+            CoinsValue.value += 20
+            Sun.centerX = 200
+            Sun.centerY = 320
+            Level.value = "Level 4"
+
+            MovingObstacles.add(
+                Polygon(80,320,100,280,120,320, fill = gradient("grey", "dimgrey", start = "left")),
+                Polygon(160,320,180,280,200,320, fill = gradient("grey", "dimgrey", start = "left")),
+                Polygon(320,320,340, 280,360,320, fill = gradient("grey", "dimgrey", start = "left")),
+                Polygon(240,320,260, 280,280,320, fill = gradient("grey", "dimgrey", start = "left"))
+                )
+
+            print(Obstacles.centerY)
+            
+            Ground.add(
+                Rect(0, 320, 400, 80, fill = gradient("forestgreen", "darkgreen", start = "left")),
+                Rect(0, 380, 400, 60, fill= gradient('saddleBrown',"saddleBrown", start='right'))                
+                )
+            
+            Coins.add(
+                Circle(215, 250, 20, fill = "goldenrod", border = "darkgoldenrod", borderWidth = 5)
+                )
+                
+        elif Level.value == "Level 4":
+            MovingObstacles.clear()
+            Obstacles.clear()
+            Ground.clear()
+            FloatyThings1.clear()
+            Props.clear()
+            Coins.clear()
+            CoinsValue.value += 20
+            Level.value = "Level 5"
+            
+        
+            Ground.add(
+                Rect(0, 320, 400, 80, fill = gradient("forestgreen", "darkgreen", start = "left")),
+                Rect(0, 380, 400, 60, fill= gradient('saddleBrown',"saddleBrown", start='right'))                                
+                )
+                
+            FloatyThings5.add(
+                Rect(80 , 265, 120, 10, fill = gradient("chocolate", "sienna", start = "left"))
+                )
+            
+            Obstacles.add(
+                Polygon(80, 320, 100, 280, 120, 320, fill = gradient("grey", "dimgrey", start = "left")),
+                Polygon(120, 320, 140, 280, 160, 320, fill = gradient("grey", "dimgrey", start = "left")),
+                Polygon(160, 320, 180, 280, 200, 320, fill = gradient("grey", "dimgrey", start = "left")),
+                Rect(255, 250, 156, 29, fill = gradient("firebrick", "maroon", start = "left")),
+                Rect(255, 180, 156, 79, fill = gradient("firebrick", "maroon", start = "left"))
+                
+                )
+            
+            Props.add(
+                Rect(277, 0, 10, 180, fill = gradient("chocolate", "sienna", start = "left")),
+                Rect(377, 0, 10, 180, fill = gradient("chocolate", "sienna", start = "left"))
+                )
+        
+        elif Level.value == "Level 5":
+            Ground.clear()
+            FloatyThings5.clear()
+            FloatyThings2.clear()
+            FloatyThings3.clear()
+            FloatyThings4.clear()
+            Obstacles.clear()
+            Props.clear()
+            Coins.clear()
+            HealthPacks.clear()
+            Level.value = "Level 6"
+            CoinsValue.value += 20
+            
+            CoinsText.fill = "black"
+            CoinsValue.fill = "black"
+            LivesText.fill = "black"
+            LivesValue.fill = "black"
+            
+            Sun.centerX = 400
+            Sun.centerY = 0
+            Sun.fill = gradient("white", "whitesmoke", start = "left")
+ 
+            Ground.add(
+                Rect(0, 320, 400, 80, fill = gradient("forestgreen", "darkgreen", start = "left")),
+                Rect(0, 380, 400, 60, fill= gradient('saddleBrown',"saddleBrown", start='right'))                
+                )
+            
+            FloatyThings5.add(
+                Rect(80, 265, 40, 10, fill= "dimgray")
+                )
+            
+            FloatyThings2.add(
+                Rect(160, 200, 40, 10, fill = "dimgray")
+                )
+                
+            FloatyThings3.add(
+                Rect(240, 125, 40, 10, fill = "dimgray")
+                )
+            
+            FloatyThings4.add(
+                Rect(325, 85, 40, 10, fill = "dimgray")
+                )
+                
+            Obstacles.add(
+                Polygon(120, 320, 140, 280, 160, 320, fill = gradient("grey", "dimgrey", start = "left")),
+                Polygon(200, 320, 220, 280, 240, 320, fill = gradient("grey", "dimgrey", start = "left")),
+                Polygon(325, 85, 345, 45, 365, 85, fill = gradient("grey", "dimgrey", start = "left")),
+                Polygon(280, 320, 300, 280, 320, 320, fill = gradient("grey", "dimgrey", start = "left")),
+                Polygon(320, 320, 340, 280, 360, 320, fill = gradient("grey", "dimgrey", start = "left")),
+                Polygon(360, 320, 380, 280, 400, 320, fill = gradient("grey", "dimgrey", start = "left")),
+                Rect(80, 275, 40, 45, fill = gradient("firebrick", "maroon", start = "left")),
+                Rect(160, 210, 40, 110, fill = gradient("firebrick", "maroon", start = "left")),
+                Rect(240, 135, 40, 185, fill = gradient("firebrick", "maroon", start = "left"))
+                )
+            
+            Coins.add(
+                Circle(175, 166, 20, fill = "goldenrod", border = "darkgoldenrod", borderWidth = 5),
+                Circle(389, 195, 20, fill = "goldenrod", border = "darkgoldenrod", borderWidth = 5),
+                )
+        
+        elif Level.value == "Level 6":
+            Ground.clear()
+            FloatyThings5.clear()
+            FloatyThings2.clear()
+            FloatyThings3.clear()
+            FloatyThings4.clear()
+            Obstacles.clear()
+            Coins.clear()
+            HealthPacks.clear()
+            Level.value = "Level 7"
+            CoinsValue.value += 20
+            
+            CoinsText.fill = "black"
+            CoinsValue.fill = "black"
+            LivesText.fill = "black"
+            LivesValue.fill = "black"
+            
+            Sun.centerX = 400
+            Sun.centerY = 0
+            Sun.fill = gradient("white", "whitesmoke", start = "left")
+
+            Ground.add(
+                Rect(0, 320, 400, 80, fill = gradient("forestgreen", "darkgreen", start = "left")),
+                Rect(0, 380, 400, 60, fill= gradient('saddleBrown',"saddleBrown", start='right'))                
+                )
+                
+            FloatyThings5.add(
+                Rect(75, 265, 250, 10, fill = gradient("forestgreen", "darkgreen", start = "left"))
+                ) 
+            
+            FloatyThings2.add(
+                Rect(75, 200, 250, 10, fill = gradient("forestgreen", "darkgreen", start =  "left"))
+                )
+            
+            FloatyThings3.add(
+                Rect(75, 125, 250, 10, fill = gradient("forestgreen", "darkgreen", start = "left"))
+                )
+                
+            FloatyThings4.add(
+                Rect(75, 50, 325, 10, fill = gradient("forestgreen", "darkgreen", start = "left"))
+                )
+            Obstacles.add(
+                Rect(75, 310, 325, 10, fill = gradient("red", "firebrick", start = "left")),
+                Rect(390, 60, 10, 260, fill = gradient("red", "firebrick", start = "left")),
+                Rect(75,275,250, 2, fill = gradient("red", "firebrick", start = "left")),
+                Rect(75, 210, 250, 1, fill = gradient("red", "firebrick", start = "left")),
+                Rect(75, 135, 250, 1, fill = gradient("red", "firebrick", start = "left")),
+                Rect(75,60, 315, 1, fill = gradient("red", "firebrick", start = "left"))
+                )
+                
+            Coins.add(
+                Circle(305, 170, 20, fill = "goldenrod", border = "darkgoldenrod", borderWidth = 5),
+                Circle(305, 95, 20, fill = "goldenrod", border = "darkgoldenrod", borderWidth = 5),
+                Circle(99, 25, 20, fill = "goldenrod", border = "darkgoldenrod", borderWidth = 5),
+                Circle(176, 25, 20, fill = "goldenrod", border = "darkgoldenrod", borderWidth = 5),
+                Circle(253, 25, 20, fill = "goldenrod", border = "darkgoldenrod", borderWidth = 5)
+                )
+            
+            HealthPacks.add(
+                Rect(280, 233, 40, 30, fill = "white"),
+                Line(285, 240, 285, 227, fill = "white", lineWidth = 3),
+                Line(315, 240, 315, 227, fill = "white", lineWidth = 3),
+                Line(285, 227, 315, 227, fill = "white", lineWidth = 3),
+                Line(300, 240, 300, 256, fill = "red", lineWidth = 5),
+                Line(292, 248, 308, 248, fill = "red", lineWidth = 5)
+                
+                )
+
+            
+        elif Level.value == "Level 7":
+            Ground.clear()
+            FloatyThings5.clear()
+            FloatyThings2.clear()
+            FloatyThings3.clear()
+            FloatyThings4.clear()
+            Props.clear()
+            Obstacles.clear()
+            Coins.clear()
+            HealthPacks.clear()
+            Sun.visible = False
+            Level.value = "Level 8"
+            CoinsValue.value += 20
+            Player.visible = False
+
+            CoinsText.fill = "white"
+            CoinsValue.fill = "white"
+            LivesText.fill = "white"
+            LivesValue.fill = "white"
+            Level.fill = "black"
+            
+            YouWin.visible = True
+            
+            ReturnButton.visible = True
+            
+            
+            
+            
+        if Level.value == "Level 4" or Level.value == "Level 3" or Level.value == "Level 5":
+            app.background = gradient(rgb(255, 227, 115), rgb(252, 156, 84), rgb(253, 94, 83), rgb(75, 61, 96), rgb(21, 40, 82), rgb(8, 24, 58), start = "bottom")     
+    
+        if Level.value == "Level 6" or Level.value == "Level 7":
+            app.background = gradient("midnightblue", "midnightblue", "midnightblue","midnightblue", "whitesmoke", start = "bottom-left")
+        
+        if Level.value == "Level 8":
+            app.background = "black"
+        Player.centerY = 200
+        
+     
+                                                                                               
